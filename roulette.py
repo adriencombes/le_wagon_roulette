@@ -19,12 +19,14 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     print(box,'\n')
 
 def picker(batch):
-    with open(os.path.join('data',f'{batch}.csv'),newline='') as csvfile:
-        reader = csv.reader(csvfile, skipinitialspace=True)
-        student = f'~ {random.choice(list(reader))[0]} ~'
-
-    print('\nAnd the winner is :')
-    print_msg_box(msg=student,indent=5)
+    try:
+        with open(os.path.join('data',f'{batch}.csv'),newline='') as csvfile:
+            reader = csv.reader(csvfile, skipinitialspace=True)
+            student = f'~ {random.choice(list(reader))[0]} ~'
+        print('\nAnd the winner is :')
+        print_msg_box(msg=student,indent=5)
+    except FileNotFoundError:
+        print('otto')
 
 if __name__ == '__main__':
     picker(sys.argv[1])
